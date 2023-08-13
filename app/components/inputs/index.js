@@ -9,6 +9,7 @@ const Input = ({
   value,
   onChage,
   secureTextEntry,
+  style
 }) => {
   return (
     <TextInput
@@ -16,7 +17,7 @@ const Input = ({
       onChangeText={onChage}
       placeholder={placeholderText}
       numberOfLines={numberOfLines}
-      style={[styles.input, {borderColor: colors.lightGray}]}
+      style={[styles.input, {borderColor: colors.lightGray}, style]}
       placeholderTextColor={colors.lightGray}
       secureTextEntry={secureTextEntry}
     />

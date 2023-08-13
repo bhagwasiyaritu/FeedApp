@@ -10,11 +10,13 @@ import Header from '../../components/header';
 import {strings} from '../../util/strings';
 import Feed from '../../components/feed';
 import {routes} from '../../util/routes';
+import moment from 'moment';
+import Loading from '../../components/loading';
 
 const Home = () => {
   const dispatch = useAppDispatch();
   const naviagtion = useNavigation();
-  const {feedData} = useAppSelector(getFeedData);
+  const {feedData, loading} = useAppSelector(getFeedData);
 
   console.log('From Home', feedData);
 
@@ -29,7 +31,9 @@ const Home = () => {
     dispatch(fetchFeedData());
   };
 
-  return (
+  return loading ? (
+    <Loading />
+  ) : (
     <>
       <Header
         headerTitle={strings.feedApp}
@@ -37,11 +41,14 @@ const Home = () => {
       />
       <View style={commonStyle.container}>
         <FlatList
+          showsVerticalScrollIndicator={false}
           data={feedData}
           renderItem={({item}) => (
             <Feed
               imageUri={item?.author?.image}
               authorName={item?.author?.username}
+              createdAt={moment(item?.createdAt).format('MMM Do YY')}
+              description={item?.description}
             />
           )}
           keyExtractor={item => item.id}
