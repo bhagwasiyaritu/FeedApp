@@ -1,5 +1,5 @@
 import {View, Text} from 'react-native';
-import React, {useCallback, useEffect} from 'react';
+import React, {useCallback} from 'react';
 import {commonStyle} from '../../util/commonStyles';
 import {useAppSelector} from '../../hooks/useAppSelector';
 import {getFeedData} from '../../redux/selectors';

@@ -1,11 +1,20 @@
-import {View, Text} from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {styles} from './styles';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { colors } from '../../util/colors';
+import { commonStyle } from '../../util/commonStyles';
 
 const Header = ({headerTitle}) => {
   return (
-    <View style={styles.container}>
-      <Text>{headerTitle}</Text>
+    <View style={[commonStyle.row, styles.container]}>
+      <TouchableOpacity>
+        <Icon name="arrow-left" color={colors.white} size={15}/>
+      </TouchableOpacity>
+      <Text style={styles.text}>{headerTitle}</Text>
+      <TouchableOpacity>
+        <Icon name="user" color={colors.white} size={20}/>
+      </TouchableOpacity>
     </View>
   );
 };

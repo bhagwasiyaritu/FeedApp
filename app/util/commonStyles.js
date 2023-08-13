@@ -5,4 +5,8 @@ export const commonStyle = StyleSheet.create({
     flex: 1,
     padding: 20,
   },
+  row:{
+    flexDirection:'row',
+    alignItems:'center'
+  }
 });
