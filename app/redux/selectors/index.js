@@ -14,3 +14,8 @@ export const getSingleFeedData = createSelector(
   [state => state.singleFeedData],
   singleFeedData => singleFeedData,
 );
+
+export const getCommentData = createSelector(
+  [state => state.commentListData],
+  commentListData => commentListData,
+);

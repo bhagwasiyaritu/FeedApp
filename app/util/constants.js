@@ -7,4 +7,5 @@ export const endpoints = {
   feedAPI: 'articles?limit=10&offset=',
   loginAPI: 'users/login',
   singleFeedApi: 'articles/',
+  commentList: 'articles/',
 };

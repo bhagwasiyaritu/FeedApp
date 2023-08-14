@@ -4,11 +4,13 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import FeedDataSlice from '../slice/FeedData.slice';
 import LoginSlice from '../slice/Login.slice';
 import SingleFeedSlice from '../slice/SingleFeed.slice';
+import CommentsListSlice from '../slice/CommentsList.slice';
 
 export const reducer = {
   loginData: LoginSlice,
   feedData: FeedDataSlice,
-  singleFeedData:SingleFeedSlice
+  singleFeedData:SingleFeedSlice,
+  commentListData:CommentsListSlice
 };
 
 const whitelist = ['loginData'];

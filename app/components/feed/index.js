@@ -1,5 +1,5 @@
 import {View, Text, Image, TouchableOpacity, FlatList} from 'react-native';
-import React from 'react';
+import React, {Children} from 'react';
 import {styles} from './styles';
 import {commonStyle} from '../../util/commonStyles';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -22,6 +22,7 @@ const Feed = ({
   body,
   activeOpacity,
   tagData,
+  children,
 }) => {
   return (
     <TouchableOpacity
@@ -82,6 +83,7 @@ const Feed = ({
           <Icon name="paper-plane" size={15} />
         </TouchableOpacity>
       </View>
+      {children}
     </TouchableOpacity>
   );
 };
