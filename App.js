@@ -9,7 +9,7 @@ import { colors } from './app/util/colors';
 const App = () => {
   return (
     <Provider store={store}>
-      <SafeAreaView style={[commonStyle.container,{backgroundColor:colors.primary}]}>
+      <SafeAreaView style={{flex:1, backgroundColor:colors.primary}}>
         <StatusBar translucent
           backgroundColor={colors.primary}
           barStyle={'light-content'}

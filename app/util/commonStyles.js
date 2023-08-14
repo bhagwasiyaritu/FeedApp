@@ -4,7 +4,7 @@ import { colors } from './colors';
 export const commonStyle = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
+    padding:20,
     backgroundColor:colors.white
   },
   row:{

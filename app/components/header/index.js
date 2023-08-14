@@ -1,4 +1,4 @@
-import {View, Text, TouchableOpacity} from 'react-native';
+import {View, Text, TouchableOpacity, Platform} from 'react-native';
 import React from 'react';
 import {styles} from './styles';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -14,7 +14,12 @@ const Header = ({
   isShowBack,
 }) => {
   return (
-    <View style={[commonStyle.row, styles.container]}>
+    <View
+      style={[
+        commonStyle.row,
+        styles.container,
+        {marginTop: Platform.OS == 'android' ? 30 : 0},
+      ]}>
       {isShowBack && (
         <TouchableOpacity onPress={onBackPress}>
           <Icon name="arrow-left" size={20} color={colors.white} />
@@ -24,8 +29,7 @@ const Header = ({
         {headerTitle}
       </Text>
       <TouchableOpacity
-        onPress={onUserIconClick}
-        style={{justifyContent: 'center', alignItems: 'center'}}>
+        onPress={onUserIconClick}>
         {isLogin ? (
           <Text style={[styles.text, {marginTop: 20}]}>{userName}</Text>
         ) : (
