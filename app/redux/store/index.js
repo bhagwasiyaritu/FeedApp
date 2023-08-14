@@ -5,12 +5,14 @@ import FeedDataSlice from '../slice/FeedData.slice';
 import LoginSlice from '../slice/Login.slice';
 import SingleFeedSlice from '../slice/SingleFeed.slice';
 import CommentsListSlice from '../slice/CommentsList.slice';
+import CreateCommentSlice from '../slice/CreateComment.slice';
 
 export const reducer = {
   loginData: LoginSlice,
   feedData: FeedDataSlice,
   singleFeedData:SingleFeedSlice,
-  commentListData:CommentsListSlice
+  commentListData:CommentsListSlice,
+  commentData:CreateCommentSlice
 };
 
 const whitelist = ['loginData'];

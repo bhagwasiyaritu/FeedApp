@@ -19,3 +19,8 @@ export const getCommentData = createSelector(
   [state => state.commentListData],
   commentListData => commentListData,
 );
+
+export const postCommentData = createSelector(
+  [state => state.commentData],
+  commentData => commentData,
+);

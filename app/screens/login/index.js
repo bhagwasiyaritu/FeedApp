@@ -21,10 +21,8 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  console.log('Check Login Data', loginData);
 
   const onSubmit = () => {
-    console.log('Enter');
     if (username.length == 0 && password.length == 0) {
       setError('Please enter valid username and password.');
       return;

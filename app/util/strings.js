@@ -4,5 +4,6 @@ export const strings = {
   submit: 'Submit',
   loginPlaceholderText: 'Username/Email/Phone number',
   password: 'Password',
-  commentOnThis:'Comment on this...'
+  commentOnThis: 'Comment on this...',
+  done: 'Done',
 };

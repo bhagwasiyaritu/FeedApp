@@ -5,10 +5,8 @@ import {BaseUrl, endpoints} from '../../util/constants';
 export const fetchFeedData = createAsyncThunk('fetchFeedData', async (data) => {
   try {
     const response = await axios.get(`${BaseUrl}${endpoints.feedAPI}${data}`);
-    console.log('Check Response', response);
     return response.data;
   } catch (error) {
-    console.log('Check Error', error);
     return error;
   }
 });

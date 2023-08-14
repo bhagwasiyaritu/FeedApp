@@ -1,9 +1,14 @@
 import {View, Text, ScrollView} from 'react-native';
-import React, {useCallback, useEffect} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {commonStyle} from '../../util/commonStyles';
 import {useAppDispatch} from '../../hooks/useAppDispatch';
 import {useAppSelector} from '../../hooks/useAppSelector';
-import {getCommentData, getSingleFeedData} from '../../redux/selectors';
+import {
+  getCommentData,
+  getSingleFeedData,
+  login,
+  postCommentData,
+} from '../../redux/selectors';
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {fetchSingleFeedData} from '../../redux/slice/SingleFeed.slice';
 import Feed from '../../components/feed';
@@ -11,6 +16,8 @@ import Header from '../../components/header';
 import Loading from '../../components/loading';
 import Comment from '../../components/comment';
 import {fetchCommentData} from '../../redux/slice/CommentsList.slice';
+import {createCommentData} from '../../redux/slice/CreateComment.slice';
+import Toast from '../../components/toast';
 
 const SingleFeed = route => {
   const navigation = useNavigation();
@@ -18,8 +25,11 @@ const SingleFeed = route => {
   const dispatch = useAppDispatch();
   const {singleFeedData, loading} = useAppSelector(getSingleFeedData);
   const {commentList} = useAppSelector(getCommentData);
+  const {commentData} = useAppSelector(postCommentData);
+  const {loginData} = useAppSelector(login);
 
-  console.log('Check from single feed page', commentList);
+  const [comment, setComment] = useState('');
+  const [showToast, setShowToast] = useState(false);
 
   useFocusEffect(
     useCallback(() => {
@@ -41,6 +51,20 @@ const SingleFeed = route => {
     navigation.goBack();
   };
 
+  const commentPost = () => {
+    const data = {
+      slug: slug,
+      comment: {body: comment},
+      token: loginData?.user?.token,
+    };
+    dispatch(createCommentData(data));
+    setComment('');
+    setShowToast(true);
+    setTimeout(() => {
+      setShowToast(false);
+    }, 1000);
+  };
+
   return loading ? (
     <Loading />
   ) : (
@@ -49,6 +73,8 @@ const SingleFeed = route => {
         headerTitle={singleFeedData?.title}
         isShowBack={true}
         onBackPress={onBackPress}
+        isLogin={loginData?.user ? true : false}
+        userName={loginData?.user?.username}
       />
       <View style={commonStyle.container}>
         <ScrollView showsVerticalScrollIndicator={false}>
@@ -62,6 +88,9 @@ const SingleFeed = route => {
             body={singleFeedData?.body}
             activeOpacity={1}
             tagData={singleFeedData?.tagList}
+            onSendPress={commentPost}
+            commentValue={comment}
+            onCommentChange={setComment}
             children={
               <Comment
                 imageUri={singleFeedData?.author?.image}
@@ -71,6 +100,7 @@ const SingleFeed = route => {
             }
           />
         </ScrollView>
+        {showToast && <Toast />}
       </View>
     </>
   );

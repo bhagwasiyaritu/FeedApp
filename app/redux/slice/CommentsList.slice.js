@@ -9,10 +9,8 @@ export const fetchCommentData = createAsyncThunk(
       const response = await axios.get(
         `${BaseUrl}${endpoints.commentList}${data}/comments`,
       );
-      console.log('Check Single Feed Response', response);
       return response.data;
     } catch (error) {
-      console.log('Check Single Feed Error', error);
       return error;
     }
   },

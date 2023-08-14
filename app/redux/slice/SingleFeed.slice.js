@@ -9,10 +9,8 @@ export const fetchSingleFeedData = createAsyncThunk(
       const response = await axios.get(
         `${BaseUrl}${endpoints.singleFeedApi}${data}`,
       );
-      console.log('Check Single Feed Response', response);
       return response.data;
     } catch (error) {
-      console.log('Check Single Feed Error', error);
       return error;
     }
   },

@@ -7,6 +7,7 @@ import Input from '../inputs';
 import {strings} from '../../util/strings';
 import {numFormatter} from '../../util/helperFuncations';
 import moment from 'moment';
+import {colors} from '../../util/colors';
 
 const Feed = ({
   imageUri,
@@ -23,6 +24,8 @@ const Feed = ({
   activeOpacity,
   tagData,
   children,
+  commentValue,
+  onCommentChange,
 }) => {
   return (
     <TouchableOpacity
@@ -78,9 +81,24 @@ const Feed = ({
         <Input
           style={styles.commentInput}
           placeholderText={strings.commentOnThis}
+          value={commentValue}
+          onChage={onCommentChange}
         />
-        <TouchableOpacity style={styles.userContainer} onPress={onSendPress}>
-          <Icon name="paper-plane" size={15} />
+        <TouchableOpacity
+          style={[
+            styles.userContainer,
+            {
+              borderColor: commentValue.length
+                ? colors.primary
+                : colors.lightGray,
+            },
+          ]}
+          onPress={onSendPress}>
+          <Icon
+            name="paper-plane"
+            size={15}
+            color={commentValue.length ? colors.primary : null}
+          />
         </TouchableOpacity>
       </View>
       {children}

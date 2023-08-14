@@ -5,10 +5,8 @@ import {BaseUrl, endpoints} from '../../util/constants';
 export const onLoginApi = createAsyncThunk('onLoginApi', async (data) => {
   try {
     const response = await axios.post(`${BaseUrl}${endpoints.loginAPI}`, data);
-    console.log('Check Login Response', response);
     return response.data;
   } catch (error) {
-    console.log('Check Login Error', error);
     return error;
   }
 });
