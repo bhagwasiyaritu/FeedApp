@@ -5,6 +5,7 @@ import { StyleSheet } from 'react-native'
         borderRadius:8,
         borderWidth:2,
         marginVertical:12,
-        paddingHorizontal:12
+        paddingHorizontal:12,
+        minHeight:40
     }
  })

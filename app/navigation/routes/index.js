@@ -1,7 +1,5 @@
 import {NavigationContainer} from '@react-navigation/native';
 import Stack from '../stack';
-import {StatusBar} from 'react-native';
-import {colors} from '../../util/colors';
 
 export default function Routes() {
   return (
@@ -13,7 +11,6 @@ export default function Routes() {
           primary: 'white',
         },
       }}>
-      <StatusBar backgroundColor={colors.primary} barStyle={'light-content'} />
       <Stack />
     </NavigationContainer>
   );

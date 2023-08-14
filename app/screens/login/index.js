@@ -11,6 +11,7 @@ import {useAppSelector} from '../../hooks/useAppSelector';
 import {login} from '../../redux/selectors';
 import {useNavigation} from '@react-navigation/native';
 import {routes} from '../../util/routes';
+import Header from '../../components/header';
 
 const Login = () => {
   const dispatch = useAppDispatch();
@@ -20,7 +21,6 @@ const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-
 
   const onSubmit = () => {
     if (username.length == 0 && password.length == 0) {
@@ -44,24 +44,35 @@ const Login = () => {
     }
   };
 
-  return (
-    <View style={[commonStyle.container, styles.container]}>
-      <Text style={styles.title}>Login</Text>
-      <Input
-        placeholderText={strings.loginPlaceholderText}
-        value={username}
-        onChage={setUsername}
-      />
-      <Input
-        placeholderText={strings.password}
-        value={password}
-        onChage={setPassword}
-        secureTextEntry={true}
-      />
+  const goBack = () => {
+    naviagtion.goBack();
+  };
 
-      {error && <Text style={commonStyle.error}>{error}</Text>}
-      <Button btnTitle={strings.submit} onPress={onSubmit} />
-    </View>
+  return (
+    <>
+      <Header
+        headerTitle={strings.login}
+        isLogin={true}
+        isShowBack={true}
+        onBackPress={goBack}
+      />
+      <View style={[commonStyle.container, styles.container]}>
+        <Input
+          placeholderText={strings.loginPlaceholderText}
+          value={username}
+          onChage={setUsername}
+        />
+        <Input
+          placeholderText={strings.password}
+          value={password}
+          onChage={setPassword}
+          secureTextEntry={true}
+        />
+
+        {error && <Text style={commonStyle.error}>{error}</Text>}
+        <Button btnTitle={strings.submit} onPress={onSubmit} />
+      </View>
+    </>
   );
 };
 
