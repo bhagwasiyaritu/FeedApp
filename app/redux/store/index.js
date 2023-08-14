@@ -2,12 +2,16 @@ import {combineReducers, configureStore} from '@reduxjs/toolkit';
 import {persistReducer, persistStore} from 'redux-persist';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import FeedDataSlice from '../slice/FeedData.slice';
+import LoginSlice from '../slice/Login.slice';
+import SingleFeedSlice from '../slice/SingleFeed.slice';
 
 export const reducer = {
+  loginData: LoginSlice,
   feedData: FeedDataSlice,
+  singleFeedData:SingleFeedSlice
 };
 
-const whitelist = ['loginApi'];
+const whitelist = ['loginData'];
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,

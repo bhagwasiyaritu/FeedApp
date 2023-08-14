@@ -2,9 +2,9 @@ import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import axios from 'axios';
 import {BaseUrl, endpoints} from '../../util/constants';
 
-export const fetchFeedData = createAsyncThunk('fetchFeedData', async () => {
+export const fetchFeedData = createAsyncThunk('fetchFeedData', async (data) => {
   try {
-    const response = await axios.get(`${BaseUrl}${endpoints.feedAPI}`);
+    const response = await axios.get(`${BaseUrl}${endpoints.feedAPI}${data}`);
     console.log('Check Response', response);
     return response.data;
   } catch (error) {

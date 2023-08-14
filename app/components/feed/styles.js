@@ -47,6 +47,6 @@ export const styles = StyleSheet.create({
   commentInput:{
     flex:1,
     padding:4,
-    marginLeft:12
+    marginHorizontal:12
   }
 });

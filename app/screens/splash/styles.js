@@ -13,5 +13,5 @@ export const styles = StyleSheet.create({
     fontSize:44,
     textTransform:'uppercase',
     fontWeight:'bold'
-  },
+  }
 });

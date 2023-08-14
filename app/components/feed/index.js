@@ -1,31 +1,72 @@
-import {View, Text, Image, TouchableOpacity} from 'react-native';
+import {View, Text, Image, TouchableOpacity, FlatList} from 'react-native';
 import React from 'react';
 import {styles} from './styles';
 import {commonStyle} from '../../util/commonStyles';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Input from '../inputs';
-import { strings } from '../../util/strings';
+import {strings} from '../../util/strings';
+import {numFormatter} from '../../util/helperFuncations';
+import moment from 'moment';
 
-const Feed = ({imageUri, authorName, createdAt, description}) => {
+const Feed = ({
+  imageUri,
+  authorName,
+  createdAt,
+  description,
+  favCount,
+  onCardPress,
+  onHeartPress,
+  onCommentPress,
+  onSendPress,
+  feedTitle,
+  body,
+  activeOpacity,
+  tagData,
+}) => {
   return (
-    <View style={styles.cardContainer}>
+    <TouchableOpacity
+      style={styles.cardContainer}
+      onPress={onCardPress}
+      activeOpacity={activeOpacity}>
       <TouchableOpacity style={commonStyle.row}>
         <Image source={{uri: imageUri}} style={styles.authorImage} />
-        <View style={commonStyle.row}>
-          <Text numberOfLines={1} style={styles.authorName}>
-            {authorName}
-          </Text>
-          <Text numberOfLines={1} style={styles.createdAt}>
-            {createdAt}
-          </Text>
+        <View>
+          <View style={commonStyle.row}>
+            <Text numberOfLines={1} style={styles.authorName}>
+              {authorName}
+            </Text>
+            <Text numberOfLines={1} style={styles.createdAt}>
+              {moment(createdAt).format('MMM Do YY')}
+            </Text>
+          </View>
+          <FlatList
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            data={tagData}
+            renderItem={({item, index}) => (
+              <Text style={styles.createdAt}>{`${item} ${
+                tagData.length > 0 && index != tagData.length - 1 ? '|' : ''
+              } `}</Text>
+            )}
+            keyExtractor={item => item}
+          />
         </View>
       </TouchableOpacity>
+      <Text numberOfLines={2} style={[styles.authorName, {marginTop: 20}]}>
+        {feedTitle}
+      </Text>
       <Text style={{marginVertical: 12}}>{description}</Text>
+      {body && <Text style={{marginVertical: 12}}>{body}</Text>}
       <View style={[commonStyle.row, {marginVertical: 12}]}>
-        <TouchableOpacity>
+        <TouchableOpacity style={commonStyle.row} onPress={onHeartPress}>
           <Icon name="heart" size={20} />
+          <Text style={[styles.createdAt, {marginLeft: 8}]}>
+            {numFormatter(favCount)}
+          </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={{marginHorizontal: 20}}>
+        <TouchableOpacity
+          style={{marginHorizontal: 20}}
+          onPress={onCommentPress}>
           <Icon name="comment" size={20} />
         </TouchableOpacity>
       </View>
@@ -33,9 +74,15 @@ const Feed = ({imageUri, authorName, createdAt, description}) => {
         <TouchableOpacity style={styles.userContainer}>
           <Icon name="user" size={20} />
         </TouchableOpacity>
-        <Input style={styles.commentInput} placeholderText={strings.commentOnThis}/>
+        <Input
+          style={styles.commentInput}
+          placeholderText={strings.commentOnThis}
+        />
+        <TouchableOpacity style={styles.userContainer} onPress={onSendPress}>
+          <Icon name="paper-plane" size={15} />
+        </TouchableOpacity>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
